@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/prasuchit.github.io/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/prasuchit.github.io/static/js/main.a31a76ce.chunk.js",
+    "main.js.map": "/prasuchit.github.io/static/js/main.a31a76ce.chunk.js.map",
+    "runtime-main.js": "/prasuchit.github.io/static/js/runtime-main.d61bf34d.js",
+    "runtime-main.js.map": "/prasuchit.github.io/static/js/runtime-main.d61bf34d.js.map",
+    "static/js/2.db39837d.chunk.js": "/prasuchit.github.io/static/js/2.db39837d.chunk.js",
+    "static/js/2.db39837d.chunk.js.map": "/prasuchit.github.io/static/js/2.db39837d.chunk.js.map",
+    "static/js/3.4a34e60f.chunk.js": "/prasuchit.github.io/static/js/3.4a34e60f.chunk.js",
+    "static/js/3.4a34e60f.chunk.js.map": "/prasuchit.github.io/static/js/3.4a34e60f.chunk.js.map",
+    "index.html": "/prasuchit.github.io/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/prasuchit.github.io/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.db39837d.chunk.js.LICENSE.txt": "/prasuchit.github.io/static/js/2.db39837d.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/prasuchit.github.io/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d61bf34d.js",
+    "static/js/2.db39837d.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.a31a76ce.chunk.js"
+  ]
+}
