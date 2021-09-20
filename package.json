@@ -1,6 +1,6 @@
 {
     "title": "Portfolio WebsiteS",
-    "name": "Prasanth Suresh",
+    "name": "prasuchit.github.io",
     "version": "7.0.3",
     "scripts": {
         "build": "npm run clean && npm run build:pug && npm run build:scss && npm run build:scripts && npm run build:assets",
