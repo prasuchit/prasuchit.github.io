@@ -1,7 +1,7 @@
 /*!
-* Start Bootstrap - Resume v7.0.3 (https://startbootstrap.com/theme/resume)
-* Copyright 2013-2021 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
+* Start Bootstrap - Portfolio WebsiteS v7.0.3 (undefined)
+* Copyright 2013-2021 undefined
+* Licensed under undefined (https://github.com/StartBootstrap/prasuchit.github.io/blob/master/LICENSE)
 */
 //
 // Scripts
