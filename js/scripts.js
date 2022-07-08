@@ -1,6 +1,6 @@
 /*!
 * Start Bootstrap - Portfolio WebsiteS v7.0.3 (undefined)
-* Copyright 2013-2021 undefined
+* Copyright 2013-2022 undefined
 * Licensed under undefined (https://github.com/StartBootstrap/prasuchit.github.io/blob/master/LICENSE)
 */
 //
