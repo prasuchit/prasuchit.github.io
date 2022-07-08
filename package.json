@@ -9,9 +9,9 @@
         "build:scripts": "node scripts/build-scripts.js",
         "build:scss": "node scripts/build-scss.js",
         "clean": "node scripts/clean.js",
+        "deploy": "npm run build && npx gh-pages -d dist",
         "start": "npm run build && node scripts/start.js",
-        "start:debug": "npm run build && node scripts/start-debug.js",
-        "deploy": "npm run build && npx gh-pages -d dist"
+        "start:debug": "npm run build && node scripts/start-debug.js"
     },
     "description": "A simple portfolio website adapted by Prasanth Suresh.",
     "keywords": [

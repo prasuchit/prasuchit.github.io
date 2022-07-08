@@ -42,6 +42,7 @@ Clone the source files of the theme and navigate into the theme's root directory
 - `npm run build:scripts` brings the `src/js/scripts.js` file into `dist`
 - `npm run build:scss` compiles the SCSS files located in the `src/scss/` directory into `dist`
 - `npm run clean` deletes the `dist` directory to prepare for rebuilding the project
+- `npm run deploy` builds and deploys the new changes onto the project webpage.
 - `npm run start:debug` runs the project in debug mode
 - `npm start` or `npm run start` runs the project, launches a live preview in your default browser, and watches for changes made to files in `src`
 
