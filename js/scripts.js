@@ -1,11 +1,33 @@
 /*!
 * Start Bootstrap - Portfolio WebsiteS v7.0.3 (undefined)
-* Copyright 2013-2022 undefined
+* Copyright 2013-2024 undefined
+* Licensed under undefined (https://github.com/StartBootstrap/prasuchit.github.io/blob/master/LICENSE)
+*/
+/*!
+* Start Bootstrap - Portfolio WebsiteS v7.0.3 (undefined)
+* Copyright 2013-2024 undefined
 * Licensed under undefined (https://github.com/StartBootstrap/prasuchit.github.io/blob/master/LICENSE)
 */
 //
 // Scripts
 // 
+
+$(document).ready(function () {
+    // Initialize the carousel
+    $('#slideshow').carousel({
+        interval: 900, // Change slide every 3 seconds
+        pause: 'hover'
+    });
+
+    // Handle manual navigation
+    $('#prevBtn').click(function () {
+        $('#slideshow').carousel('prev');
+    });
+
+    $('#nextBtn').click(function () {
+        $('#slideshow').carousel('next');
+    });
+});
 
 window.addEventListener('DOMContentLoaded', event => {
 
