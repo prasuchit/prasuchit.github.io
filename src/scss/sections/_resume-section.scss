@@ -14,8 +14,55 @@ section.resume-section {
     .resume-section-content {
         width: 100%;
     }
+
+.media-container {
+position: relative;
+width: 100%;
+height: 0;
+padding-top: 56.25%; /* 16:9 aspect ratio */
+overflow: hidden;
 }
 
+.media-container img,
+.media-container video {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+/* Disable right-clicking */
+img {
+    pointer-events: none;
+}
+
+/* Add transparent overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Transparent background */
+    pointer-events: none; /* Allow clicking through the overlay */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent white background */
+}
+
+/* Increase the size of carousel control icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    font-size: 2rem; /* Adjust size as needed */
+}
+
+}
 @include media-breakpoint-up(md) {
     section.resume-section {
         min-height: 100vh;
