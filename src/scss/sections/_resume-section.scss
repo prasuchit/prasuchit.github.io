@@ -14,6 +14,15 @@ section.resume-section {
     .resume-section-content {
         width: 100%;
     }
+    .resume-section-tutorial-content {
+        width: 100%;
+        margin-bottom: 1px; 
+    }
+
+.pdf-container {
+    border: 1.5px solid rgb(0, 0, 0); /* Border style */
+    padding: 10px; /* Optional: Add padding to the container */
+}    
 
 .media-container {
 position: relative;

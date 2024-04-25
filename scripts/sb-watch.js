@@ -5,6 +5,7 @@ const chokidar = require('chokidar');
 const upath = require('upath');
 const renderAssets = require('./render-assets');
 const renderPug = require('./render-pug');
+const renderPhp = require('./render-php');
 const renderScripts = require('./render-scripts');
 const renderSCSS = require('./render-scss');
 
@@ -26,6 +27,7 @@ watcher.on('ready', () => {
 });
 
 _handleSCSS();
+_handlePHP();
 
 function _processFile(filePath, watchEvent) {
     
@@ -83,4 +85,8 @@ function _renderAllPug() {
 
 function _handleSCSS() {
     renderSCSS();
+}
+
+function _handlePHP() {
+    renderPhp();
 }
