@@ -11409,6 +11409,16 @@ section.resume-section {
 section.resume-section .resume-section-content {
   width: 100%;
 }
+section.resume-section .resume-section-tutorial-content {
+  width: 100%;
+  margin-bottom: 1px;
+}
+section.resume-section .pdf-container {
+  border: 1.5px solid black;
+  /* Border style */
+  padding: 10px;
+  /* Optional: Add padding to the container */
+}
 section.resume-section .media-container {
   position: relative;
   width: 100%;
