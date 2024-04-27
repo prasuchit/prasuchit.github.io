@@ -18,6 +18,18 @@ section.resume-section {
         width: 100%;
         margin-bottom: 1px; 
     }
+    .resume-section-tutorial-content .topic-name {
+        font-weight: bold;
+    }
+    
+    .resume-section-tutorial-content .button-container {
+        margin-left: 10px; /* Adjust the spacing between buttons as needed */
+    }
+    
+    .resume-section-tutorial-content .button-container button {
+        margin-right: 5px; /* Adjust the spacing between buttons as needed */
+    }
+    
 
 .pdf-container {
     border: 1.5px solid rgb(0, 0, 0); /* Border style */

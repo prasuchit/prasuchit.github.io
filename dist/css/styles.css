@@ -11413,6 +11413,17 @@ section.resume-section .resume-section-tutorial-content {
   width: 100%;
   margin-bottom: 1px;
 }
+section.resume-section .resume-section-tutorial-content .topic-name {
+  font-weight: bold;
+}
+section.resume-section .resume-section-tutorial-content .button-container {
+  margin-left: 10px;
+  /* Adjust the spacing between buttons as needed */
+}
+section.resume-section .resume-section-tutorial-content .button-container button {
+  margin-right: 5px;
+  /* Adjust the spacing between buttons as needed */
+}
 section.resume-section .pdf-container {
   border: 1.5px solid black;
   /* Border style */
