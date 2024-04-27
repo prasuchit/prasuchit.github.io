@@ -3,5 +3,5 @@
 header('Content-Disposition: inline; filename="IRL-primer"');
 
 // Serve the PDF file
-readfile('../assets/pdfs/IRL-primer.pdf');
+readfile('assets/pdfs/IRL-primer.pdf');
 ?>
