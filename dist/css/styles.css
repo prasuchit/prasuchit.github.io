@@ -4,6 +4,11 @@
 * Copyright 2013-2024 undefined
 * Licensed under undefined (https://github.com/StartBootstrap/prasuchit.github.io/blob/master/LICENSE)
 */
+#tutorials ul li {
+  margin-bottom: 15px;
+  /* Adjust the value as needed */
+}
+
 /*!
  * Bootstrap v5.1.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

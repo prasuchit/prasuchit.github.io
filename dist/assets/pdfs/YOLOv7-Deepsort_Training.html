@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>YOLOv7-Deepsort_Training.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="method-to-annonate-organize-and-train-yolov7-to-use-in-combination-with-deepsort">Method to annonate, organize and train YOLOv7 to use in combination with Deepsort.</h1>
+<h2 id="written-by-prasanth-suresh-ps32611ugaedu">Written by Prasanth Suresh (ps32611@uga.edu).</h2>
+<p>To achieve a robust YOLOv7 model, it is recommended to train with over 1500 images per class, and more then 10,000 instances per class.</p>
+<h3 id="annotations">Annotations:</h3>
+<p>There are several open-sorce packages available to annotate datasets and produce labels in YOLOv7 format. Some examples include: <a href="http://labelme.csail.mit.edu/Release3.0/">Labelme</a>, <a href="https://github.com/heartexlabs/labelImg#Hotkeys">Labelimg</a>, <a href="https://labelbox.com/">Labelbox</a> and <a href="https://roboflow.com/annotate">Roboflow</a>.</p>
+<p>For this tutorial, we're going to use Roboflow. This <a href="https://blog.roboflow.com/getting-started-with-roboflow/">official documentation</a> explains how to use Roboflow to upload, organize and annotate your data. Once you're done annotating, use the &quot;Generate&quot; option on the left side panel to split the dataset into test, train and validation. Roboflow automatically suggests that you apply augmentations to the image and you can choose between a wide array of augmentations available. <strong>Just be careful not to distort/crop/zoom too much so that the desiderata in the images become unrecognizable.</strong></p>
+<p>Upon completion, you can choose to export the dataset to your local system in any of their available formats. Choose YOLOv7 under the TXT subsection.</p>
+<p>In order to combine YOLOv7 and Deepsort, I used <a href="https://github.com/deshwalmahesh/yolov7-deepsort-tracking">this package</a>, however, some modifications have been made to the original YOLOv7 code in this package and it doesn't work for training YOLO.</p>
+<h3 id="organizing-data-for-training">Organizing data for training:</h3>
+<p>YOLOv7 code accepts data in a specific format and for this, first save all the file names of the images from your train, test and val folders into seperate txt files. <strong>Note that we're going to move all the images into a single folder (lets call it Images), before training, so make sure you can find-and-replace all the paths within each txt file to the location of the Images folder.</strong></p>
+<p>I used the following code to save the filenames (don't forget to modify the paths and filenames in the below code), but feel free to use your own method:</p>
+<pre><code>    import os
+    a = open(&quot;/home/psuresh/yolov7/train_labels.txt&quot;, &quot;w&quot;)
+    for path, subdirs, files in os.walk(r&quot;/home/psuresh/yolov7/Images/train/images/&quot;):
+        for filename in files:
+            if '.jpg' in filename:
+                f = os.path.join(path, filename)
+                a.write(str(f) + os.linesep) 
+</code></pre>
+<p>You should now have 3 seperate txt files train_labels.txt, test_labels.txt, val_labels.txt with the paths of images in the train, test and val folders respectively.</p>
+<h3 id="training-yolov7">Training YOLOv7:</h3>
+<p>For this, I used the official <a href="https://github.com/WongKinYiu/yolov7">YOLOv7 code</a> and installed all the dependencies inside a custom conda environment using the requirements.txt file <a href="https://github.com/WongKinYiu/yolov7/blob/main/requirements.txt">available here</a>.</p>
+<p>Now, download a sample weights file to start your training with from <a href="https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7_training.pt">this link</a> and create a folder yolov7/weights and place it there.</p>
+<p>3 seperate txt files we extracted in the previous section(train_labels.txt, test_labels.txt, val_labels.txt), place them in the parent folder yolov7/YOURTXTFILES.</p>
+<p>Now move all the images and their corresponding labels from train, test and val folders into the yolov7/Images folder. <strong>This is the part where you replace all the paths in YOURTXTFILES to say ./Images/WHATEVERIMAGEFILENAME.jpg.</strong></p>
+<p>Next, we've to create two yaml files before we can start training. Go to yolov7/data/coco.yaml and copy all the contents into a new yaml file within the same folder (say coco_custom.yaml) and modify the following:</p>
+<pre><code>- Comment out the 'download:' line since we don't want it to try and download a coco dataset.
+
+- Change the 'train:', 'val:' and 'test:' lines to contain the relative path of YOURTXTFILES.
+
+- Modify 'nc:' line to the number of classes in your data.
+
+- Similarly, modify the 'names:' line to contain your class labels.
+</code></pre>
+<p>Finally, go to yolov7/cfg/training/yolov7.yaml and copy paste everything into a new yaml file under yolov7/cfg/training (say yolov7_custom.yaml). Now modify the 'nc:' line to the number of classes in your data and you can leave the rest to be the same.</p>
+<p>Now we're ready to start training. Open a terminal, cd to yolov7 folder (activate your custom conda env if you created one) and run the following command:</p>
+<pre><code>    python train.py --workers 8 --device 0 --batch-size 4 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7_custom.yaml --weights 'weights/yolov7_training.pt' --name yolov7_custom --hyp data/hyp.scratch.custom.yaml
+</code></pre>
+<p>If you want to leave it to train in the background without getting disconnected/interrupted, use:</p>
+<pre><code>    nohup python -u train.py --workers 8 --device 0 --batch-size 4 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7_custom.yaml --weights 'weights/yolov7_training.pt' --name yolov7_custom --hyp data/hyp.scratch.custom.yaml &gt; training_results.txt &amp;
+</code></pre>
+<p>Once it is done training, you can find the results in yolov7/training_results.txt and the trained weights inside yolov7/runs/train/YOUREXPTNAMELARGESTNUMBER/weights/best.pt.</p>
+<h3 id="deploying-it-with-deepsort">Deploying it with Deepsort:</h3>
+<p>To deploy the trained weights with YOLOv7-Deepsort combination, use <a href="https://github.com/deshwalmahesh/yolov7-deepsort-tracking">this package</a> as mentioned before. There already is a pretrained model for deepsort <a href="https://github.com/deshwalmahesh/yolov7-deepsort-tracking/blob/master/deep_sort/model_weights/mars-small128.pb">here</a> which works quite well for most problems. So you can directly open <a href="https://github.com/deshwalmahesh/yolov7-deepsort-tracking/blob/master/Colab%20Demo.ipynb">this file</a> and modify the image/video names, paths and the weights filename to your files and run the Jupyter notebook to test your YOLOv7-Deepsort combined model.</p>
+
+</body>
+</html>

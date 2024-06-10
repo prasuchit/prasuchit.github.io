@@ -9,3 +9,7 @@ $sidebar-base-width: 17rem;
 // Spacing variable to add padding to the top of the body element that matches the height of the navbar
 
 $navbar-base-height: 3.375rem;
+
+#tutorials ul li {
+    margin-bottom: 15px; /* Adjust the value as needed */
+}

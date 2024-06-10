@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBB025W44V">
-        </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBB025W44V"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
@@ -27,6 +26,21 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet">
+        <style>
+            .video-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: calc(100vh - 100px); /* Adjust for header/footer if necessary */
+                gap: 10px; /* Space between videos */
+            }
+            .video-container iframe {
+                flex: 1;
+                height: 100%;
+                border: none;
+            }
+        </style>
     </head>    
     <body id="page-top">
         <!-- Navigation-->
@@ -53,7 +67,7 @@
         <div class="container-fluid p-0">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-12"> <!-- Adjust the column size here -->
+                    <div class="col-12">
                         <!-- Title -->
                         <h2 class="text-center">
                             Prasanth
@@ -68,11 +82,9 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-12"> <!-- Adjust the column size here -->
-                        <!-- YouTube Video -->
-                        <div class="video-container">
-                            <iframe id="youtube-video" width="100%" height="400" src="https://www.youtube.com/embed/oPYQ1O6ucTU?t=3" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                    <div class="col-12 video-container">
+                        <iframe id="youtube-video-left" src="https://www.youtube.com/embed/FM1jwjuc9mc" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe id="youtube-video-right" src="https://www.youtube.com/embed/oPYQ1O6ucTU?t=3" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>        
@@ -82,5 +94,4 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js?$$REVISION$$"></script>
     </body>
-    
 </html>

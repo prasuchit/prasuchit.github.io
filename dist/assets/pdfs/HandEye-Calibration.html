@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HandEye-Calibration.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="addressing-the-problem-of-camera-extrinsic-calibration-using-hand-eye-calibration-technique">Addressing the problem of camera extrinsic calibration using Hand-Eye Calibration technique.</h1>
+<h2 id="the-following-instructions-are-written-for-and-tested-on-ubuntu-2004-ros-noetic---moveit1">The following instructions are written for and tested on Ubuntu 20.04, ROS Noetic - Moveit1.</h2>
+<h2 id="written-by-prasanth-suresh-ps32611ugaedu">Written by Prasanth Suresh (ps32611@uga.edu).</h2>
+<h3 id="the-problem">The problem:</h3>
+<p>As of today (07/20/22), this feature is only available on ROS-Noetic. This technique addresses the problem of finding the camera location wrt the world coordinate system based on the robot's transformation tree wrt the world origin and the calibration marker tag it sees in various poses.</p>
+<p>It essentially solves the problem shown in the image below (in this scenario, the camera is attached to the end effector, but the camera could also be rigidly mounted somewhere):</p>
+<p><img src="https://user-images.githubusercontent.com/31422707/180013656-8c4e3b84-118a-4c7e-b744-3ecaa841d5c7.png" alt="Hand-eye-calibration"></p>
+<p>If it is the above case, we move the endeffector, and by extension, the camera to view a steadily placed marker tag at a distance. If the camera is mounted elsewhere, we attach the marker stiffly to the endeffector and move the marker around so that the camera captures the marker in different poses.</p>
+<p>Make sure to include more rotational angles in either case, that helps build more diverse input points and ergo a more accurate solution.</p>
+<h3 id="the-dependency-problem">The dependency problem:</h3>
+<p>While just cloning <a href="https://github.com/ros-planning/moveit_calibration">moveit_calibration</a> package and resolving the dependencies using:</p>
+<p><code>rosdep install -y --from-paths . --ignore-src --rosdistro noetic</code></p>
+<p>And building the package should get you setup, there are some things you need to be wary of:</p>
+<ol>
+<li>If you're using realsense camera, rosdep install command above will try install the debian version of realsense driver. Cancel it or uninstall it once it finishes and make sure to use <a href="https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md#installing-the-packages">this method</a> and check if the <a href="https://github.com/IntelRealSense/realsense-ros/issues/2386#issuecomment-1177818564">versions match</a>.</li>
+<li>There's a broken library that the handeye calibration moveit plugin depends on. Uninstall everything related to libopenblas and instal from source <a href="https://github.com/ros-planning/moveit_calibration/issues/109#issuecomment-1040185628">as mentioned here</a>.</li>
+</ol>
+<p>Now you're good to go!</p>
+<h3 id="the-steps">The steps:</h3>
+<p>Since camera attached to hand (or eye-in-hand) has been explained in <a href="https://ros-planning.github.io/moveit_tutorials/doc/hand_eye_calibration/hand_eye_calibration_tutorial.html">these instructions</a>, I'm going to show the eye-to-hand case:</p>
+<img src="https://user-images.githubusercontent.com/31422707/180019267-750071ce-e9b2-4684-9444-7e5c171c0f68.jpg" alt="UR3e-view1" width="800" height="400">
+<img src="https://user-images.githubusercontent.com/31422707/180019299-a8ea2392-6c90-4350-bcbb-ff577edb136a.jpg" alt="UR3e-view2" width="800" height="400">
+<p>To get the plugin up and running, the default <a href="https://ros-planning.github.io/moveit_tutorials/doc/hand_eye_calibration/hand_eye_calibration_tutorial.html">ros instructions</a> will work. But follow the below settings(tested and verified):
+<img src="https://user-images.githubusercontent.com/31422707/180019687-857d43b7-074a-4447-87c1-ab4cc3f84083.png" alt="Calib-panel1">
+<img src="https://user-images.githubusercontent.com/31422707/180019688-7f021088-c663-4475-8563-0063fe24e6c3.png" alt="Calib-panel2">
+<img src="https://user-images.githubusercontent.com/31422707/180019692-e60b5682-cd8d-446f-8022-087ef1417d77.png" alt="Calib-panel3"></p>
+<p>Once you take 5 samples of the marker, the plugin should automatically print the camera transformation matrix to the terminal like this:</p>
+<p>from base frame 'world'to sensor frame 'camera_link'</p>
+<p>Reprojection error:</p>
+<p>0.037348 m, 0.0282629 rad</p>
+<p>[ INFO] [1658327615.156458109]: Publish camera transformation</p>
+<p>0.0525243  -0.998017  0.0346943  -0.224953</p>
+<p>0.87717  0.0627139   0.476067  -0.282496</p>
+<p>-0.477299 0.00542768   0.878724    1.34355</p>
+<p>0          0          0          1</p>
+<p>Then you can use an online tool like <a href="https://www.energid.com/resources/orientation-calculator">this one</a> to change from rotation matrix to roll-pitch-yaw angles and the first 3 values of the last column denote the x-y-z translations.</p>
+
+</body>
+</html>
