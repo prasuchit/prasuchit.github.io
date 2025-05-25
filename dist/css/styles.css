@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Portfolio WebsiteS v7.0.3 (undefined)
-* Copyright 2013-2024 undefined
+* Copyright 2013-2025 undefined
 * Licensed under undefined (https://github.com/StartBootstrap/prasuchit.github.io/blob/master/LICENSE)
 */
 #tutorials ul li {
@@ -11322,6 +11322,48 @@ p.lead {
   font-size: 1.5rem;
 }
 
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 100px);
+  /* Adjust for header/footer if necessary */
+  gap: 10px;
+  /* Space between videos */
+}
+
+.video-container iframe {
+  flex: 1;
+  height: 100%;
+  border: none;
+}
+
+footer {
+  padding-top: 20px;
+  /* Space on top */
+  padding-left: 20px;
+  /* Space on the left */
+  background-color: #333;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer p {
+  margin: 0;
+  /* Remove default margin */
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 #sideNav {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -11492,4 +11534,9 @@ section.resume-section .carousel-control-next-icon {
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
+}
+/* Space between list items */
+.resume-section-tutorial-content ol li {
+  margin-bottom: 15px;
+  /* Adjust this value to control the spacing */
 }
